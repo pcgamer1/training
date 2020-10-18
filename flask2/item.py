@@ -14,7 +14,8 @@ class Item(Resource):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
-        query = "SELECT * FROM {table} WHERE name=?".format(table=cls.TABLE_NAME)
+        query = "SELECT * FROM {table} WHERE name=?".format(
+            table=cls.TABLE_NAME)
         result = cursor.execute(query, (name,))
         row = result.fetchone()
         connection.close()
@@ -59,7 +60,8 @@ class Item(Resource):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
-        query = "DELETE FROM {table} WHERE name=?".format(table=self.TABLE_NAME)
+        query = "DELETE FROM {table} WHERE name=?".format(
+            table=self.TABLE_NAME)
         cursor.execute(query, (name,))
 
         connection.commit()
@@ -88,11 +90,13 @@ class Item(Resource):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
-        query = "UPDATE {table} SET price=? WHERE name=?".format(table=cls.TABLE_NAME)
+        query = "UPDATE {table} SET price=? WHERE name=?".format(
+            table=cls.TABLE_NAME)
         cursor.execute(query, (item['price'], item['name']))
 
         connection.commit()
         connection.close()
+
 
 class ItemList(Resource):
     TABLE_NAME = 'items'
